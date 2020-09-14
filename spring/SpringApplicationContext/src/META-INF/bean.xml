@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+		<context:component-scan base-package="com.training.spring" />
+		
+		<context:annotation-config/>
+		        
+        <bean id="employee" class="com.training.spring.Employee" scope="singleton">
+        	<constructor-arg value="P66790" />
+        	<property name="name" value="firstName" />        	
+        </bean>
+        
+        <bean id="singletonBean" class="com.training.spring.SingletonBean"
+			factory-method="getInstance" />
+			
+		<bean id="beanLifeCycle" class="com.training.spring.BeanLifeCycle" 
+			init-method="customInit" destroy-method="customDestroy" >        	
+        	<property name="beanDescription" value="Shows life cycle of a spring bean" />        	
+        </bean>
+        
+        <bean id="propertyInjection" class="com.training.spring.PropertyInjectionOptions" p:singleton-ref="singletonBean">
+        	<property name="textType" value="#{employee.Id}" />
+        	<property name="refType" ref="employee" />
+        	<property name="innerType">
+        		<bean class="com.training.spring.Employee">
+        			<constructor-arg value="I14235" />
+        		</bean>
+        	</property>
+        	<property name="setType">
+        		<set>
+        		<ref bean="employee" />
+        		<ref bean="employee" />
+        		<ref bean="employee" />
+        		<ref bean="employee" />
+        		</set>
+        	</property>
+        	<property name="listType">
+        		<list>
+        		<ref bean="employee" />
+        		<value>listValue</value>
+        		</list>
+        	</property>
+        </bean>
+        
+        <bean id="autowiring" class="com.training.spring.AutowireByConstructor" autowire="constructor" />
+        
+        <bean id="annotationWiring" class="com.training.spring.AnnotationBasedWiring" autowire="constructor" />
+        
+        <!-- <bean id="value" class="java.lang.String" >
+        	<constructor-arg value="Initialize a string" />        	
+        </bean>  -->
+        
+        	        	        
+</beans>

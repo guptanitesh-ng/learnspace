@@ -1,0 +1,14 @@
+package com.concepts.redis.client;
+
+import org.springframework.data.redis.connection.stream.Record;
+import org.springframework.data.redis.stream.StreamListener;
+
+public class RedisStreamListener implements StreamListener<String, Record<String, ?>> {
+
+	@Override
+	public void onMessage(Record<String, ?> message) {
+		System.out.println("message as received: " + message);
+
+	}
+
+}

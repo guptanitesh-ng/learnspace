@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="D:/Study/Server/jboss-6.1.0.Final/server/default/deployers/resteasy.deployer/commons-logging-1.1.0.jboss.jar"/>
+	<classpathentry kind="lib" path="D:/Study/Server/jboss-6.1.0.Final/server/default/deployers/resteasy.deployer/httpclient-4.0.3.jar"/>
+	<classpathentry kind="lib" path="D:/Study/Server/jboss-6.1.0.Final/server/default/deployers/resteasy.deployer/httpcore-4.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

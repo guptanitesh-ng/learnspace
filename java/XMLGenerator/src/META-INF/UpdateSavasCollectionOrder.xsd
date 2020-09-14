@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (x64) (http://www.altova.com) by L (x) -->
+<!--
+Type	Key
+short	corbaparam.header....traceLevel
+string<1>	corbaparam.header....userLangCd
+string	corbaparam.header....empty
+string	corbaparam.header....clientId
+string<16>	corbaparam.inParam....depot
+string<12>	corbaparam.inParam....valor
+string<5>	corbaparam.inParam....savasSeq
+string<25>	corbaparam.inParam....orderId
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:corba="http://www.e3ag.ch/tgrid/corba/2013/03" targetNamespace="http://www.e3ag.ch/tgrid/corba/2013/03" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="corbaparam">
+		<xs:annotation>
+			<xs:documentation>The input XML structure to the xml2spn transformation, which produces the SPN input for the Corba Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="header" type="corba:CS_B__Header_T"/>
+				<xs:element name="inParam" type="corba:UpdateSavasCollectionOrderIn_T"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="corbares">
+		<xs:annotation>
+			<xs:documentation>The output XML structure of the Corba Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="returnValue">
+					<xs:complexType>
+						<xs:attribute name="type" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<!--
+				<xs:element name="outParam">
+					<xs:annotation>
+						<xs:documentation>Don't use this element. Effective Output does not adhere to this new Schema.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="corba:UpdateSavasCollectionOrderOut_T">
+								<xs:attribute name="paramType" type="xs:string" use="required" fixed="OUT"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				-->
+				<!--
+				<xs:element name="sysEx">
+					<xs:annotation>
+						<xs:documentation>Don't use this element. Effective Output does not adhere to this new Schema.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="corba:CS_B__Ex_T">
+								<xs:attribute name="paramType" type="xs:string" use="required" fixed="OUT"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				-->
+				<xs:element name="outParam">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="xs:anyType">
+								<xs:attribute name="paramType" type="xs:string" use="required" fixed="OUT"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="sysEx">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="xs:anyType">
+								<xs:attribute name="paramType" type="xs:string" use="required" fixed="OUT"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="UpdateSavasCollectionOrderIn_T">
+		<xs:sequence>
+			<xs:element name="orderId">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString25">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;25>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="setOrderToState">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString1">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;1>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="lastModifiedTS">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString26">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;26>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateSavasCollectionOrderOut_T">
+		<xs:sequence>
+			<xs:element name="orderId">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString25">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;25>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="orderStatus">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString2">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;2>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="lastModifiedTS">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString26">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;26>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="remarks" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="corba:CS_B__ExDescr_T">
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="busEx" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="corba:CS_B__ExDescr_T">
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Header and System Exception and Trace-->
+	<xs:complexType name="CS_B__Header_T">
+		<xs:sequence>
+			<xs:element name="traceLevel">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:short">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="short"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="userLangCd">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString1">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;1>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="empty">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="clientId">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CS_B__ExDescr_T">
+		<xs:sequence>
+			<xs:element name="cd">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString8">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;8>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="timestamp">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="corba:TString26">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string&lt;26>"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="params" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ctx" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CS_B__Ex_T">
+		<xs:sequence>
+			<xs:element name="d" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="corba:CS_B__ExDescr_T">
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="t" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="corba:CS_B__ExTraceEntry_T">
+							<xs:attributeGroup ref="corba:TAttributeSequence1D"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CS_B__ExTraceEntry_T">
+		<xs:sequence>
+			<xs:element name="pgm">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="id">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="type" type="xs:string" use="required" fixed="string"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- string with fixed length -->
+	<xs:simpleType name="TString1" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString2" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString5" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString8" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString12" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString16" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString25" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TString26" final="">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- sequence attribute definition-->
+	<xs:simpleType name="TEnumSequenceType">
+		<xs:annotation>
+			<xs:documentation>denotes if it's a sequence or an array. Sequence will be transformed to 'element', array will be transformed to 'arrayElement'.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="sequence"/>
+			<xs:enumeration value="array"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="TAttributeSequence">
+		<xs:annotation>
+			<xs:documentation>Base attribute group, containing a sequenceType attribute and the originalType. The index attribute is added a subsequent attributeGroup, that includes this attribute Group.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="sequenceType" type="corba:TEnumSequenceType" use="required"/>
+	</xs:attributeGroup>
+	<xs:simpleType name="TAttributeIndex1D">
+		<xs:annotation>
+			<xs:documentation>restrict the index with a pattern to 1D</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="TAttributeSequence1D">
+		<xs:attributeGroup ref="corba:TAttributeSequence"/>
+		<xs:attribute name="index" type="corba:TAttributeIndex1D" use="required"/>
+	</xs:attributeGroup>
+	<xs:simpleType name="TAttributeIndex2D">
+		<xs:annotation>
+			<xs:documentation>restrict the index with a pattern to 2D</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+,[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="TAttributeSequence2D">
+		<xs:attributeGroup ref="corba:TAttributeSequence"/>
+		<xs:attribute name="index" type="corba:TAttributeIndex2D" use="required"/>
+	</xs:attributeGroup>
+</xs:schema>

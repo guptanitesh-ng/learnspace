@@ -1,0 +1,2 @@
+[Battery [rechargeable=false, getName()=Large Battery, getPrice()=40.0], Disc [rewritable=true, getName()=CD, getPrice()=20.0], Battery [rechargeable=true, getName()=Small Battery, getPrice()=20.0], Disc [rewritable=false, getName()=DVD, getPrice()=35.0]]
+Total Amount :115.0

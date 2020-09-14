@@ -1,0 +1,8 @@
+<ehcache updateCheck="false" monitoring="autodetect" dynamicConfig="true">
+    <cache name="compute" eternal="false" maxEntriesLocalHeap="1000" timeToIdleSeconds="1000"
+        timeToLiveSeconds="1000">
+        <cacheEventListenerFactory listenFor="local"
+            class="com.concepts.finance.service.TTLCacheEventListenerFactory" />
+        <persistence strategy="none" />
+    </cache>
+</ehcache>    

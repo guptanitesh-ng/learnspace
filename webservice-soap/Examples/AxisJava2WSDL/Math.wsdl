@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.cts.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.cts.com">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.cts.com">
+            <xs:element name="add">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="a" type="xs:int"/>
+                        <xs:element minOccurs="0" name="b" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="addRequest">
+        <wsdl:part name="parameters" element="ns:add"/>
+    </wsdl:message>
+    <wsdl:message name="addResponse">
+        <wsdl:part name="parameters" element="ns:addResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="MathPortType">
+        <wsdl:operation name="add">
+            <wsdl:input message="ns:addRequest" wsaw:Action="urn:add"/>
+            <wsdl:output message="ns:addResponse" wsaw:Action="urn:addResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MathSoap11Binding" type="ns:MathPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="add">
+            <soap:operation soapAction="urn:add" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="MathSoap12Binding" type="ns:MathPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="add">
+            <soap12:operation soapAction="urn:add" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="MathHttpBinding" type="ns:MathPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="add">
+            <http:operation location="add"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Math">
+        <wsdl:port name="MathHttpSoap11Endpoint" binding="ns:MathSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/Math"/>
+        </wsdl:port>
+        <wsdl:port name="MathHttpSoap12Endpoint" binding="ns:MathSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/Math"/>
+        </wsdl:port>
+        <wsdl:port name="MathHttpEndpoint" binding="ns:MathHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/Math"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

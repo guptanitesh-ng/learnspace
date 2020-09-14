@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence>
+	<persistence-unit name="EJBTraining">
+		<jta-data-source>java:/ejbSampleProjectDS</jta-data-source>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto"/>
+		</properties>
+	</persistence-unit>
+</persistence>

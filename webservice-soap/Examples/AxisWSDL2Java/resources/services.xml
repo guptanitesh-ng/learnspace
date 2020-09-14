@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST) -->
+<serviceGroup>
+    <service name="MathService">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.cts.service.MathServiceMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.cts.service.MathServiceSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="add" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://ws.math.cts.com/">
+            <actionMapping>http://ws.math.cts.com/Math/addRequest</actionMapping>
+            <outputActionMapping>http://ws.math.cts.com/Math/addResponse</outputActionMapping>
+        </operation>
+        <operation name="subract" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://ws.math.cts.com/">
+            <actionMapping>http://ws.math.cts.com/Math/subractRequest</actionMapping>
+            <outputActionMapping>http://ws.math.cts.com/Math/subractResponse</outputActionMapping>
+        </operation>
+        <operation name="multiply" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://ws.math.cts.com/">
+            <actionMapping>http://ws.math.cts.com/Math/multiplyRequest</actionMapping>
+            <outputActionMapping>http://ws.math.cts.com/Math/multiplyResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

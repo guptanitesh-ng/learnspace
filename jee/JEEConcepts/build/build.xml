@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project name="concepts" basedir="." default="deploy_ejb_jar">
+	
+	<property file="build.properties" />
+	<property name="env.root" value="${app.root}/exec" />
+	<property name="build.classes.dir" value="${env.root}/classes" />
+	<property name="build.make.war.dir" value="${env.root}/makeWAR" />
+	<property name="build.make.ejbjar.dir" value="${env.root}/makeEJBjar" />
+	<property name="build.make.ear.dir" value="${env.root}/makeEAR" />
+	<property name="build.war.dir" value="${env.root}/war" />
+	<property name="build.ear.dir" value="${env.root}/ear" />
+	<property name="src.dir" value="${src.root}" />
+	<property name="metainf.dir" value="${metainf.root}" />
+	<property name="config.dir" value="${config.root}" />
+				
+	<path id="classpath">
+		<fileset dir="${jboss.home}/client">
+	    	<include name="**/*.jar"/>
+	    </fileset>
+	    <pathelement location="${build.classes.dir}"/>	    
+	</path>
+	
+	<property name="classpath" refid="classpath" />
+	
+	<target name="clean">
+		<echo message="Clearing build directories" />
+		<echo message="${env.root}" />
+		<echo message="${build.classes.dir}" />
+		<delete>
+			<fileset dir="${env.root}" />				
+		</delete>
+		<echo message="Build directories cleaned..." />
+	</target>
+	
+	<target name="init" depends="clean">
+		<echo message="Creating build directories" />
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${build.make.war.dir}" />
+		<mkdir dir="${build.make.ejbjar.dir}" />
+		<mkdir dir="${build.make.ear.dir}" />
+		<mkdir dir="${build.war.dir}" />
+		<mkdir dir="${build.ear.dir}" />		
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo message="Starting compilation process" />		
+		<javac classpath="${classpath}" compiler="modern"
+			srcdir="${src.dir}" includes="**/*.java" 
+			debug="on" debuglevel="lines,source,vars" 
+			optimize="off" fork="yes" 
+			destdir="${build.classes.dir}" />		
+	</target>
+	
+	<target name="make_ejb_jar" depends="compile">
+		<copy todir="${build.make.ejbjar.dir}">
+		   <fileset dir="${build.classes.dir}">
+		   		<include name="com/concepts/jee/**/*.class" />			
+		   </fileset>
+		</copy>
+		<jar basedir="${build.make.ejbjar.dir}" destfile="${build.make.ejbjar.dir}/EJBConcepts.jar" >
+			<metainf dir="${metainf.dir}" />
+		</jar>
+	</target>
+	
+	<target name="deploy_ejb_jar" depends="make_ejb_jar">
+		<copy todir="${jboss.home}/server/default/deploy" file="${build.make.ejbjar.dir}/EJBConcepts.jar"></copy>
+	</target>	
+	
+</project>
+

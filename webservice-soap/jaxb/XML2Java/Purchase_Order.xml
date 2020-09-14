@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PurchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:noNamespaceSchemaLocation="C:\example\po.xsd">
+    <BillTo>
+        <Name>Will Jhonson</Name>
+        <Street>1234 Main Street</Street>
+        <City>Jacksonville</City>
+        <State>FL</State>
+        <Zip>32216</Zip>
+    </BillTo>
+    <Items>
+        <Item>
+            <ProductName>GodFather</ProductName>
+            <Quantity>5</Quantity>
+            <Price>15.99</Price>
+        </Item>
+    </Items>
+</PurchaseOrder>

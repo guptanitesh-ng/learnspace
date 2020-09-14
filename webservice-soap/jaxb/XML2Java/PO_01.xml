@@ -1,0 +1,16 @@
+
+<PurchaseOrder>
+    <BillTo>
+        <Name>Shaun Pitt</Name>
+        <City>Kingston</City>
+        <State>Wales</State>
+        <Zip>22xx</Zip>
+    </BillTo>
+    <Items>
+        <Item>
+            <ProductName>Java Jaxb</ProductName>
+            <Quantity>1</Quantity>
+            <Price>579.5400</Price>
+        </Item>
+    </Items>
+</PurchaseOrder>

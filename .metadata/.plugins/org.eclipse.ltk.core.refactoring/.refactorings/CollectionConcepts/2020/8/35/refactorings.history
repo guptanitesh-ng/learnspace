@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;emptyList&apos; from expression &apos;Collections.EMPTY_LIST&apos;&#x0D;&#x0A;- Original project: &apos;CollectionConcepts&apos;&#x0D;&#x0A;- Variable name: &apos;emptyList&apos;&#x0D;&#x0A;- Destination method: &apos;com.collection.search.PracticeCollections.main()&apos;&#x0D;&#x0A;- Variable expression: &apos;Collections.EMPTY_LIST&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;emptyList&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;com.collection.search{PracticeCollections.java" name="emptyList" replace="true" selection="173 0" stamp="1598367766300" version="1.0"/>
+</session>

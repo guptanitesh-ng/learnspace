@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\nitesh.gupta\learnspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2077485751.index
+3546051371.index
+2005487141.index
+3560802443.index
+2811309663.index
+1829705718.index

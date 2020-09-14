@@ -1,0 +1,103 @@
+{
+    index: "comply_md_application_patientvisit_development",
+    type: "patient_visit",
+    body: {
+        query: {
+            bool: {
+                must: [{
+                    bool: {
+                        must: [{
+                            bool: {
+                                minimum_should_match: 1,
+                                should: [{
+                                    term: {
+                                        "name" => {
+                                            value: "0041",
+                                            boost: 5.0
+                                        }
+                                    }
+                                }, {
+                                    term: {
+                                        "account_number" => {
+                                            value: "0041"
+                                        }
+                                    }
+                                }, {
+                                    term: {
+                                        "mrn" => {
+                                            value: "0041"
+                                        }
+                                    }
+                                }, {
+                                    term: {
+                                        "doctors_names" => {
+                                            value: "0041"
+                                        }
+                                    }
+                                }, {
+                                    term: {
+                                        "document_numbers" => {
+                                            value: "0041"
+                                        }
+                                    }
+                                }]
+                            }
+                        }]
+                    }
+                }]
+            }
+        },
+        post_filter: {
+            bool: {}
+        },
+        aggregations: {
+            user_id: {
+                filter: {
+                    bool: {}
+                },
+                aggregations: {
+                    user_id: {
+                        terms: {
+                            field: "associated_user_ids",
+                            size: 2147483647
+                        }
+                    }
+                }
+            },
+            patient_id: {
+                filter: {
+                    bool: {}
+                },
+                aggregations: {
+                    patient_id: {
+                        cardinality: {
+                            field: "patient_id",
+                            precision_threshold: 100
+                        }
+                    }
+                }
+            },
+            facility_id: {
+                filter: {
+                    bool: {}
+                },
+                aggregations: {
+                    facility_id: {
+                        terms: {
+                            field: "facility_id",
+                            size: 2147483647
+                        }
+                    }
+                }
+            }
+        },
+        sort: [{
+            order_time: {
+                order: "desc"
+            }
+        }],
+        size: 10,
+        from: 0,
+        track_scores: true
+    }
+}

@@ -1,0 +1,14 @@
+Server3, Language, Python, 2.7.1
+Server2, Language, Python, 2.6.3
+Server1, Language, Python, 2.8.3
+Server0, Language, Python, 3.0.0
+ServerA, Language, Java, 1.8.141
+ServerB, Language, Java, 1.7.64
+ServerC, Language, Java, 1.6.19
+ServerX, AS, JBOSS, 4.0.5
+ServerY, AS, JBOSS, 6.5.7
+ServerZ, AS, JBOSS, 8.0.1
+
+
+9
+38 95 29 22 15 49 34 70 93

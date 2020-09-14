@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=redis/C:\/Users\/nitesh.gupta\/.m2\/repository\/org\/springframework\/data\/spring-data-redis\/2.2.6.RELEASE\/spring-data-redis-2.2.6.RELEASE.jar&lt;org.springframework.data.redis.core(StringRedisTemplate.class[StringRedisTemplate" modifiers="33" timestamp="1599675201121"/>
+<typeInfo handle="=redis/C:\/Users\/nitesh.gupta\/.m2\/repository\/org\/springframework\/data\/spring-data-redis\/2.2.6.RELEASE\/spring-data-redis-2.2.6.RELEASE.jar&lt;org.springframework.data.redis.connection(MessageListener.class[MessageListener" modifiers="1537" timestamp="1599675201121"/>
+<typeInfo handle="=redis/C:\/Users\/nitesh.gupta\/.m2\/repository\/org\/springframework\/data\/spring-data-redis\/2.2.6.RELEASE\/spring-data-redis-2.2.6.RELEASE.jar&lt;org.springframework.data.redis.listener.adapter(MessageListenerAdapter.class[MessageListenerAdapter" modifiers="33" timestamp="1599675201121"/>
+<typeInfo handle="=redis/src\/main\/java&lt;com.concepts.redis.client{Entity.java[Entity" modifiers="1" timestamp="1598626467425"/>
+<typeInfo handle="=redis/C:\/Users\/nitesh.gupta\/.m2\/repository\/org\/springframework\/data\/spring-data-redis\/2.2.6.RELEASE\/spring-data-redis-2.2.6.RELEASE.jar&lt;org.springframework.data.redis.listener(PatternTopic.class[PatternTopic" modifiers="33" timestamp="1599675201121"/>
+</typeInfoHistroy>
