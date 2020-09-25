@@ -5,14 +5,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.concepts.redis.client.Entity;
@@ -26,6 +24,7 @@ import com.jayway.restassured.response.Response;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RedisApplicationTests {
 
+	private static final String HTTP_LOCALHOST = "http://localhost:";
 	@LocalServerPort
 	private int port;
 
@@ -34,16 +33,20 @@ public class RedisApplicationTests {
 	}
 
 	@Test
-	public void testRestAssured() {
-		RestAssured.given().auth().preemptive().basic("user1", UUID.randomUUID().toString()).and()
-				.accept(ContentType.JSON).when().get("https://www.google.co.in/").then()
-				.statusCode(HttpStatus.OK.value());
+	public void testCachingUpdatingAndEviction() {
+		Response response = RestAssured.given().get(HTTP_LOCALHOST + port + "/remove");
+		assert("Spring Boot Archived".equals(response.getBody().asString()));
+		 response = RestAssured.given().get(HTTP_LOCALHOST + port + "/hello");
+		assert("Spring Boot".equals(response.getBody().asString()));
+		response = RestAssured.given().get(HTTP_LOCALHOST + port + "/update");
+		assert("Spring Boot Current".equals(response.getBody().asString()));
+		
 	}
 
 	@Test
 	public void testThinkingSortedSets() {
 		Response response = RestAssured.given().accept(ContentType.JSON).when()
-				.get("http://localhost:" + port + "/playSortedSets").thenReturn();
+				.get(HTTP_LOCALHOST + port + "/playSortedSets").thenReturn();
 		assert (response.getStatusCode() == 200);
 		JsonPath jsonPath = response.getBody().jsonPath(new JsonPathConfig());
 		Map<Object, Object> map = jsonPath.getMap("data");
@@ -54,7 +57,7 @@ public class RedisApplicationTests {
 	@Test
 	public void testPipelining() {
 		Response response = RestAssured.given().accept(ContentType.JSON).when()
-				.get("http://localhost:" + port + "/tryPipelining").thenReturn();
+				.get(HTTP_LOCALHOST + port + "/tryPipelining").thenReturn();
 		assert (response.getStatusCode() == 200);
 		assertTrue(response.getBody().asString().contains("11"));
 	}
@@ -63,21 +66,21 @@ public class RedisApplicationTests {
 	public void testPublishing() {
 		Response response = RestAssured.given().contentType(ContentType.JSON)
 				.body(new Entity(1, "Entity published via post request"))
-				.post("http://localhost:" + port + "/letsPublish").thenReturn();
+				.post(HTTP_LOCALHOST + port + "/letsPublish").thenReturn();
 		assert (response.getStatusCode() == 202);
 	}
 
 	@Test
 	public void testStreaming() {
 		Response response = RestAssured.given().contentType(ContentType.JSON)
-				.body(new Entity(1, "Entity streamed to log")).post("http://localhost:" + port + "/checkoutStreaming")
+				.body(new Entity(1, "Entity streamed to log")).post(HTTP_LOCALHOST + port + "/checkoutStreaming")
 				.thenReturn();
 		assert (response.getStatusCode() == 202);
 	}
 
 	@Test
 	public void testTransaction() {
-		Response response = RestAssured.given().get("http://localhost:" + port + "/runTransaction").thenReturn();
+		Response response = RestAssured.given().get(HTTP_LOCALHOST + port + "/runTransaction").thenReturn();
 		assert (response.getStatusCode() == 200);
 		List<Entity> asList = Arrays.asList(response.getBody().as(Entity[].class));
 		assert (asList.size() == 4);

@@ -1,5 +1,0 @@
-package com.concepts.redis.client;
-
-public class RedisSubscriber {
-
-}

@@ -22,8 +22,20 @@ public class RedisController {
 
 	@RequestMapping("/hello")
 	public String sayHello(@RequestParam(value = "name", defaultValue = "Spring Boot") String name) {
-		System.out.println(redisClient.getCacheValue(name));
-		return "Hello " + name + "!!!";
+		return (redisClient.getCacheValue(name));
+		//return "Hello " + name + "!!!";
+	}
+	
+	@RequestMapping("/update")
+	public String update(@RequestParam(value = "name", defaultValue = "Spring Boot") String name) {
+		return redisClient.updateCacheValue(name);
+		//return "Hello " + name + "!!!";
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(@RequestParam(value = "name", defaultValue = "Spring Boot") String name) {
+		return redisClient.evictCacheValue();
+		//return "Hello " + name + "!!!";
 	}
 
 	@RequestMapping("/customizations")

@@ -9,12 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -94,6 +99,7 @@ public class RedisConfiguration {
 	}
 
 	@Bean
+	@Primary
 	public RedisCacheManager cacheManager() {
 		RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(connectionFactory());
 		builder.cacheDefaults(defaultCacheConfiguration());
@@ -104,6 +110,14 @@ public class RedisConfiguration {
 		});
 		builder.withInitialCacheConfigurations(cacheConfigurations);
 		return builder.build();
+	}
+	
+	@Bean
+	public CacheManager ehCacheCacheManager() {
+		EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+		ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+		EhCacheCacheManager cacheManager = new EhCacheCacheManager(ehCacheManagerFactoryBean.getObject());
+		return cacheManager;
 	}
 
 	@Bean

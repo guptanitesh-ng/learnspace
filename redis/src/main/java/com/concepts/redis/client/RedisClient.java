@@ -15,6 +15,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -31,7 +32,6 @@ import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.concepts.redis.configuration.RedisCacheKeyPrefix;
@@ -76,7 +76,18 @@ public class RedisClient {
 	@Cacheable(cacheNames = { "cache1", "cache2", "cache3" }, key = "#login", unless = "#result == null")
 	public String getCacheValue(String login) {
 		System.out.println("Not found in cache");
-		return "success";
+		return login;
+	}
+
+	@CacheEvict("cache2")
+	public String evictCacheValue() {
+		System.out.println("Cache eviction done.");
+		return "Spring Boot Archived";
+	}
+	
+	@CachePut("cache2")
+	public String updateCacheValue(String newLogin) {
+		return "Spring Boot Current";
 	}
 
 	@Cacheable(cacheResolver = "dynamicCacheResolver", keyGenerator = "methodNameKeyGenerator")
@@ -135,12 +146,6 @@ public class RedisClient {
 			e1.printStackTrace();
 			return null;
 		}
-	}
-
-	@Scheduled(fixedDelay = 5000)
-	@CacheEvict("cache2")
-	public void evictCacheValue() {
-		System.out.println("Cache eviction done.");
 	}
 
 	// Interesting finding with hash key and value serializer getting defaulted to

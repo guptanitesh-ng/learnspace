@@ -1,7 +1,0 @@
-package com.concepts.redis.client;
-
-import org.springframework.data.redis.connection.MessageListener;
-
-public class RedisSubscriber implements MessageListener {
-
-}
