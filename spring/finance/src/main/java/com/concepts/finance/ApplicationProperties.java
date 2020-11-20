@@ -1,10 +1,8 @@
 package com.concepts.finance;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource({ "classpath*:clu-dal-admin-redis_context.xml" })
 public class ApplicationProperties {
 
     private String hostsConfig;
