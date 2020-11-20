@@ -129,16 +129,16 @@ public class ESApplicationRunner implements ApplicationRunner {
         });
 
         // Put Document
-        IndexRequest indexRequest = new IndexRequest(EMPLOYEES);
-        indexRequest.source(createDocumentSource(), XContentType.JSON);
-        IndexResponse indexResponse = restHighLevelClient.index(indexRequest,
-                RequestOptions.DEFAULT);
-        indexResponse.getId();
+        //IndexRequest indexRequest = new IndexRequest(EMPLOYEES);
+        //indexRequest.source(createDocumentSource(), XContentType.JSON);
+        //IndexResponse indexResponse = restHighLevelClient.index(indexRequest,
+        //       RequestOptions.DEFAULT);
+        //indexResponse.getId();
 
         // Get Document
-        GetRequest getRequest = new GetRequest(EMPLOYEES, indexResponse.getId());
-        GetResponse getResponse = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
-        System.out.println(getResponse);
+        //GetRequest getRequest = new GetRequest(EMPLOYEES, indexResponse.getId());
+        //GetResponse getResponse = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
+        //System.out.println(getResponse);
     }
 
     private List<Employee> getEmployees()

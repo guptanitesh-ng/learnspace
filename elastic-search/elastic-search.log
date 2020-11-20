@@ -1,0 +1,152 @@
+2020-11-20 16:41:25.906  INFO 12760 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 12760 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 16:41:25.922  INFO 12760 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 16:41:28.250  INFO 12760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 16:41:28.263  INFO 12760 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 16:41:28.264  INFO 12760 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 16:41:28.382  INFO 12760 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 16:41:28.382  INFO 12760 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2369 ms
+2020-11-20 16:41:30.226  INFO 12760 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 16:41:30.452  INFO 12760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 16:41:30.456  INFO 12760 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 5.185 seconds (JVM running for 5.738)
+2020-11-20 16:41:40.608  INFO 12760 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-20 16:41:40.617 ERROR 12760 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute ApplicationRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:778) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:765) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	at com.concepts.elasticsearch.ElasticSearchApplication.main(ElasticSearchApplication.java:10) [classes/:na]
+Caused by: org.elasticsearch.ElasticsearchStatusException: Elasticsearch exception [type=cluster_block_exception, reason=index [employees] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];]
+	at org.elasticsearch.rest.BytesRestResponse.errorFromXContent(BytesRestResponse.java:177) ~[elasticsearch-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.parseEntity(RestHighLevelClient.java:1793) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.parseResponseException(RestHighLevelClient.java:1770) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.internalPerformRequest(RestHighLevelClient.java:1527) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.performRequest(RestHighLevelClient.java:1484) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.performRequestAndParseEntity(RestHighLevelClient.java:1454) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at org.elasticsearch.client.RestHighLevelClient.index(RestHighLevelClient.java:871) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+	at com.concepts.elasticsearch.configuration.ESApplicationRunner.run(ESApplicationRunner.java:134) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:775) [spring-boot-2.2.6.RELEASE.jar:2.2.6.RELEASE]
+	... 5 common frames omitted
+	Suppressed: org.elasticsearch.client.ResponseException: method [POST], host [http://localhost:9200], URI [/employees/_doc?timeout=1m], status line [HTTP/1.1 403 Forbidden]
+{"error":{"root_cause":[{"type":"cluster_block_exception","reason":"index [employees] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];"}],"type":"cluster_block_exception","reason":"index [employees] blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];"},"status":403}
+		at org.elasticsearch.client.RestClient.convertResponse(RestClient.java:283) ~[elasticsearch-rest-client-7.6.0.jar:7.6.0]
+		at org.elasticsearch.client.RestClient.performRequest(RestClient.java:261) ~[elasticsearch-rest-client-7.6.0.jar:7.6.0]
+		at org.elasticsearch.client.RestClient.performRequest(RestClient.java:235) ~[elasticsearch-rest-client-7.6.0.jar:7.6.0]
+		at org.elasticsearch.client.RestHighLevelClient.internalPerformRequest(RestHighLevelClient.java:1514) ~[elasticsearch-rest-high-level-client-7.6.0.jar:7.6.0]
+		... 10 common frames omitted
+
+2020-11-20 16:41:40.623  INFO 12760 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 16:49:07.838  INFO 12636 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 12636 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 16:49:07.842  INFO 12636 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 16:49:09.841  INFO 12636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 16:49:09.851  INFO 12636 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 16:49:09.852  INFO 12636 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 16:49:09.960  INFO 12636 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 16:49:09.961  INFO 12636 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2076 ms
+2020-11-20 16:49:11.722  INFO 12636 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 16:49:11.906  INFO 12636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 16:49:11.910  INFO 12636 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.714 seconds (JVM running for 5.287)
+2020-11-20 16:52:08.326  INFO 12636 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 16:52:08.327  INFO 12636 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 16:52:08.333  INFO 12636 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-11-20 16:53:36.737  INFO 12636 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 16:53:47.497  INFO 23548 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 23548 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 16:53:47.501  INFO 23548 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 16:53:49.377  INFO 23548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 16:53:49.388  INFO 23548 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 16:53:49.389  INFO 23548 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 16:53:49.490  INFO 23548 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 16:53:49.490  INFO 23548 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1944 ms
+2020-11-20 16:53:51.068  INFO 23548 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 16:53:51.294  INFO 23548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 16:53:51.297  INFO 23548 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.271 seconds (JVM running for 4.838)
+2020-11-20 16:53:51.382 DEBUG 23548 --- [main] org.elasticsearch.client.RestClient      : request [GET http://localhost:9200/employees/_mapping?master_timeout=30s&ignore_throttled=false&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true] returned [HTTP/1.1 200 OK]
+2020-11-20 16:54:43.252  INFO 23548 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 16:54:43.252  INFO 23548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 16:54:43.259  INFO 23548 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-11-20 16:54:43.358 DEBUG 23548 --- [http-nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 16:54:47.271 DEBUG 23548 --- [http-nio-8080-exec-2] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:07:18.036  INFO 23548 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:07:28.324  INFO 21848 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 21848 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 17:07:28.329  INFO 21848 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 17:07:30.315  INFO 21848 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 17:07:30.323  INFO 21848 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 17:07:30.324  INFO 21848 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 17:07:30.420  INFO 21848 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 17:07:30.421  INFO 21848 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2038 ms
+2020-11-20 17:07:32.003  INFO 21848 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:07:32.186  INFO 21848 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 17:07:32.189  INFO 21848 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.362 seconds (JVM running for 4.999)
+2020-11-20 17:07:32.274 DEBUG 21848 --- [main] org.elasticsearch.client.RestClient      : request [GET http://localhost:9200/employees/_mapping?master_timeout=30s&ignore_throttled=false&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:07:51.374  INFO 21848 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 17:07:51.375  INFO 21848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 17:07:51.382  INFO 21848 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-11-20 17:07:51.655 DEBUG 21848 --- [http-nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:08:45.596  INFO 21848 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:08:57.951  INFO 22272 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 22272 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 17:08:57.954 DEBUG 22272 --- [main] c.c.e.ElasticSearchApplication           : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-11-20 17:08:57.955  INFO 22272 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 17:09:00.018  INFO 22272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 17:09:00.034  INFO 22272 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 17:09:00.034  INFO 22272 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 17:09:00.136  INFO 22272 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 17:09:00.137  INFO 22272 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2123 ms
+2020-11-20 17:09:01.744  INFO 22272 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:09:01.923  INFO 22272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 17:09:01.926  INFO 22272 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.582 seconds (JVM running for 5.452)
+2020-11-20 17:09:02.006 DEBUG 22272 --- [main] org.elasticsearch.client.RestClient      : request [GET http://localhost:9200/employees/_mapping?master_timeout=30s&ignore_throttled=false&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:09:24.084  INFO 22272 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 17:09:24.084  INFO 22272 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 17:09:24.090  INFO 22272 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2020-11-20 17:09:24.160 DEBUG 22272 --- [http-nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:09:24.189 DEBUG 22272 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : Received reponse: 
+2020-11-20 17:10:59.683  INFO 22272 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:11:23.605  INFO 7400 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 7400 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 17:11:23.608 DEBUG 7400 --- [main] c.c.e.ElasticSearchApplication           : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-11-20 17:11:23.609  INFO 7400 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 17:11:25.441  INFO 7400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 17:11:25.450  INFO 7400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 17:11:25.450  INFO 7400 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 17:11:25.544  INFO 7400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 17:11:25.544  INFO 7400 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1894 ms
+2020-11-20 17:11:27.056  INFO 7400 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:11:27.230  INFO 7400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 17:11:27.233  INFO 7400 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.112 seconds (JVM running for 4.702)
+2020-11-20 17:11:27.315 DEBUG 7400 --- [main] org.elasticsearch.client.RestClient      : request [GET http://localhost:9200/employees/_mapping?master_timeout=30s&ignore_throttled=false&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:12:31.925  INFO 7400 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 17:12:31.926  INFO 7400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 17:12:31.932  INFO 7400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-11-20 17:12:31.983 DEBUG 7400 --- [http-nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:12:32.011 DEBUG 7400 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : Received response: 
+2020-11-20 17:31:42.253  INFO 7400 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:31:56.197  INFO 13020 --- [main] c.c.e.ElasticSearchApplication           : Starting ElasticSearchApplication on PUNE-NGUPTA with PID 13020 (C:\Users\nitesh.gupta\learnspace\elastic-search\target\classes started by nitesh.gupta in C:\Users\nitesh.gupta\learnspace\elastic-search)
+2020-11-20 17:31:56.200 DEBUG 13020 --- [main] c.c.e.ElasticSearchApplication           : Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-11-20 17:31:56.201  INFO 13020 --- [main] c.c.e.ElasticSearchApplication           : No active profile set, falling back to default profiles: default
+2020-11-20 17:31:58.327  INFO 13020 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-20 17:31:58.341  INFO 13020 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-20 17:31:58.341  INFO 13020 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-11-20 17:31:58.477  INFO 13020 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-20 17:31:58.478  INFO 13020 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2234 ms
+2020-11-20 17:32:00.018  INFO 13020 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-20 17:32:00.276  INFO 13020 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-20 17:32:00.279  INFO 13020 --- [main] c.c.e.ElasticSearchApplication           : Started ElasticSearchApplication in 4.644 seconds (JVM running for 5.293)
+2020-11-20 17:32:00.371 DEBUG 13020 --- [main] org.elasticsearch.client.RestClient      : request [GET http://localhost:9200/employees/_mapping?master_timeout=30s&ignore_throttled=false&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:32:33.069  INFO 13020 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-20 17:32:33.073  INFO 13020 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-20 17:32:33.079  INFO 13020 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-11-20 17:32:33.126 DEBUG 13020 --- [http-nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/employees/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=11m&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned [HTTP/1.1 200 OK]
+2020-11-20 17:32:33.151 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : Received response: 
+2020-11-20 17:32:33.153 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30801,"first_name":"CINTHIA","last_name":"YASUTOMI","designation":"Software Engineer","salary":51000,"date_of_joining":null,"address":"7666 Canal Lane Clarkston, MI 48348","gender":"Female","age":28,"marital_status":"Married","projects":[{"name":"Bulldozer","code":"KPGQ33828673"},{"name":"Metro","code":"YFTL98210250"}],"interests":["Home Repair","Tutoring Children","Running","Collecting Antiques","Lawn Darts"],"supervisor":{"firstname":"DEANDRA","lastname":"BECKS"}}
+2020-11-20 17:32:33.153 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30802,"first_name":"TRISTAN","last_name":"SCIULLI","designation":"Software Engineer","salary":50000,"date_of_joining":null,"address":"867 Penn St. Newtown, PA 18940","gender":"Male","age":25,"marital_status":"Unmarried","projects":[],"interests":["Train Spotting"],"supervisor":{"firstname":"SHAWNDA","lastname":"THAI"}}
+2020-11-20 17:32:33.153 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30803,"first_name":"HECTOR","last_name":"SILVANO","designation":"Software Engineer","salary":56000,"date_of_joining":null,"address":"8376 Columbia St. Fairborn, OH 45324","gender":"Male","age":28,"marital_status":"Unmarried","projects":[{"name":"Rhinestone","code":"FLFN90945293"}],"interests":["Taxidermy","Grip Strength","Microscopy"],"supervisor":{"firstname":"ERVIN","lastname":"FEUTZ"}}
+2020-11-20 17:32:33.154 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30804,"first_name":"CARLTON","last_name":"REDO","designation":"Software Engineer","salary":54000,"date_of_joining":null,"address":"873 Depot St. Northville, MI 48167","gender":"Male","age":27,"marital_status":"Unmarried","projects":[],"interests":["Church/church activities"],"supervisor":{"firstname":"JENNY","lastname":"CHAIREZ"}}
+2020-11-20 17:32:33.154 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30805,"first_name":"FAE","last_name":"SUGAI","designation":"Software Engineer","salary":56000,"date_of_joining":null,"address":"805 Bishop Drive Suite 4 Owensboro, KY 42301","gender":"Female","age":26,"marital_status":"Unmarried","projects":[{"name":"Odyssey","code":"QKNS70625669"}],"interests":["Bicycle Polo","Archery"],"supervisor":{"firstname":"JON","lastname":"SER"}}
+2020-11-20 17:32:33.154 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30806,"first_name":"KARYL","last_name":"DUSETT","designation":"Software Engineer","salary":52000,"date_of_joining":null,"address":"51 Thatcher Drive Sugar Land, TX 77478","gender":"Female","age":27,"marital_status":"Married","projects":[{"name":"Xena","code":"HMNY25133857"},{"name":"Vikings","code":"UPTP53648811"}],"interests":["R/C Cars"],"supervisor":{"firstname":"JEAN","lastname":"RENTSCHLER"}}
+2020-11-20 17:32:33.155 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30807,"first_name":"MARIANNA","last_name":"FRUMKIN","designation":"Software Engineer","salary":53000,"date_of_joining":null,"address":"187 Locust Dr. Pickerington, OH 43147","gender":"Female","age":27,"marital_status":"Unmarried","projects":[{"name":"Cold Fusion","code":"WHPC82112853"},{"name":"White Feather","code":"OANI72468812"}],"interests":["Swimming","Roleplaying"],"supervisor":{"firstname":"KEITHA","lastname":"ZOMBORY"}}
+2020-11-20 17:32:33.155 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30808,"first_name":"KYLE","last_name":"LAGAN","designation":"Software Engineer","salary":60000,"date_of_joining":null,"address":"98 Edgemont Court Deer Park, NY 11729","gender":"Male","age":27,"marital_status":"Unmarried","projects":[{"name":"Metro","code":"YFTL98210250"},{"name":"Bulldozer","code":"KPGQ33828673"}],"interests":["Guitar","Acting","Soap Making","YoYo","Gardening","Glowsticking","Knotting"],"supervisor":{"firstname":"CARMA","lastname":"EFRATI"}}
+2020-11-20 17:32:33.155 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30809,"first_name":"CLARK","last_name":"GREENBUSH","designation":"Software Engineer","salary":59000,"date_of_joining":null,"address":"626 Sussex Dr. Villa Rica, GA 30180","gender":"Male","age":25,"marital_status":"Unmarried","projects":[{"name":"Sahara","code":"KJGO32851566"}],"interests":["Bell Ringing","Jewelry Making","Airsofting","Church/church activities","Saltwater Aquariums","Football"],"supervisor":{"firstname":"JOHNA","lastname":"PULTZ"}}
+2020-11-20 17:32:33.155 DEBUG 13020 --- [http-nio-8080-exec-1] c.c.e.c.ElasticSearchController          : {"employee_id":30810,"first_name":"ANDRIA","last_name":"GIROTE","designation":"Software Engineer","salary":52000,"date_of_joining":null,"address":"8086 Border Ave. Jenison, MI 49428","gender":"Female","age":30,"marital_status":"Married","projects":[{"name":"Yaeger","code":"BQOU86557875"}],"interests":["Conworlding","Crossword Puzzles"],"supervisor":{"firstname":"MAURITA","lastname":"SKONCZEWSKI"}}

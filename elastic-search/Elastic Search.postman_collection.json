@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "d4006128-0520-4655-a03f-576afec6c16b",
+		"name": "Elastic Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateIndex with shards and replica settings",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"settings\" : {\r\n        \"number_of_shards\": 3,\r\n        \"number_of_replicas\": 2\r\n    }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:9200/customer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"customer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateIndex custom routing",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"doubles_winner_1_name\": null,\r\n\t\"doubles_winner_1_player_id\": null,\r\n\t\"doubles_winner_1_player_slug\": null,\r\n\t\"doubles_winner_1_url\": null,\r\n\t\"doubles_winner_2_name\": null,\r\n\t\"doubles_winner_2_player_id\": null,\r\n\t\"doubles_winner_2_player_slug\": null,\r\n\t\"doubles_winner_2_url\": null,\r\n\t\"singles_winner_name\": \"Spencer Gore\",\r\n\t\"singles_winner_player_id\": \"gi91\",\r\n\t\"singles_winner_player_slug\": \"spencer-gore\",\r\n\t\"singles_winner_url\": \"/en/players/spencer-gore/gi91/overview\",\r\n\t\"tourney_conditions\": \"Outdoor\",\r\n\t\"tourney_dates\": \"1877.07.09\",\r\n\t\"tourney_day\": 9,\r\n\t\"tourney_doubles_draw\": 32,\r\n\t\"tourney_fin_commit\": null,\r\n\t\"tourney_id\": 540,\r\n\t\"tourney_location\": \"London, Great Britain\",\r\n\t\"tourney_month\": 7,\r\n\t\"tourney_name\": \"Wimbledon\",\r\n\t\"tourney_order\": 1,\r\n\t\"tourney_singles_draw\": 32,\r\n\t\"tourney_slug\": \"wimbledon\",\r\n\t\"tourney_surface\": \"Grass\",\r\n\t\"tourney_url_suffix\": \"/en/scores/archive/wimbledon/540/1877/results\",\r\n\t\"tourney_year\": 1877,\r\n\t\"tourney_year_id\": \"1877-540\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/customer/_doc/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"customer",
+						"_doc",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Mapping - add multi field for alphabetical sorting",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"properties\": {\r\n        \"first_name\": {\r\n            \"type\": \"text\",\r\n            \"fields\": {\r\n                \"sortable_name\": {\r\n                    \"type\": \"keyword\",\r\n                    \"normalizer\": \"lowercase_normalizer\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_mapping"
+					]
+				},
+				"description": "Update mapping by adding multi field for specifying a normalizer for alphabetical sorting.\r\nUpdate mapping by disabling some fields from being searched."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Mapping - add multi field for specifying analyzer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"properties\": {\r\n        \"interests\": {\r\n            \"type\": \"text\",\r\n            \"fields\": {\r\n                \"search_interests\": {\r\n                    \"type\": \"text\",\r\n                    \"analyzer\": \"autocomplete\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_mapping"
+					]
+				},
+				"description": "Update mapping by adding multi field for specifying an analyzer for autocomplete search."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Settings - add normalizer with lowercase filter",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"settings\": {\r\n        \"analysis\": {\r\n            \"normalizer\": {\r\n                \"lowercase_normalizer\": {\r\n                    \"type\": \"custom\",\r\n                    \"char_filter\": [],\r\n                    \"filter\": [\r\n                        \"lowercase\"\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_settings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_settings"
+					]
+				},
+				"description": "Update settings of the index to specify the normalizer. This could then be used with one or more field of index for storing field value as lowercase string."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Settings - add analyzer with lowercase, word joiner and auto complete filter and keyword tokenizer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"settings\": {\r\n        \"analysis\": {\r\n            \"filter\": {\r\n                \"autocomplete_filter\": {\r\n                    \"type\": \"edge_ngram\",\r\n                    \"min_gram\": \"1\",\r\n                    \"max_gram\": \"20\"\r\n                },\r\n                \"word_joiner\": {\r\n                    \"type\": \"word_delimiter\",\r\n                    \"catenate_all\": true\r\n                }\r\n            },\r\n            \"analyzer\": {\r\n                \"autocomplete\": {\r\n                    \"type\": \"custom\",\r\n                    \"filter\": [\r\n                        \"lowercase\",\r\n                        \"word_joiner\",\r\n                        \"autocomplete_filter\"\r\n                    ],\r\n                    \"tokenizer\": \"keyword\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_settings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_settings"
+					]
+				},
+				"description": "Update settings of the index to specify the normalizer. This could then be used with one or more field of index for storing field value as lowercase string."
+			},
+			"response": []
+		},
+		{
+			"name": "Open - Close Index",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_open",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_open"
+					]
+				},
+				"description": "This API call is used to _close and _open the index. A common usage scenario is when trying to update settings of an index to add a normalizer or analyzer - it is required to close the existing index first then perform the update and open the index for settings to take effect."
+			},
+			"response": []
+		},
+		{
+			"name": "Apply analyzer to check the outcome",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"analyzer\": \"autocomplete\",\r\n    \"text\": \"golf, football, reading, skiing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_analyze",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_analyze"
+					]
+				},
+				"description": "This API call uses the analyzer which is already included in the mapping of the index either at the time of creation of index or by updating the settings later on. Another way to perform the check is to use the following request data where the field refers to the name of the field to which the analyzer to be tested has been applied.\r\n {\r\n  \"field\": \"my_text\", \r\n  \"text\":  \"golf, football, reading, skiing\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Empty Search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/employees/_search?stored_fields=contact",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "stored_fields",
+							"value": "contact"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - scroll initialize",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\" : {\r\n        \"match_all\" : {}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search?scroll=1m",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "scroll",
+							"value": "1m"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - scroll browse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scroll\" : \"1m\",\r\n    \"scroll_id\" : \"DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAAIWVW8xT3c2RkRURVNNeVV5eUw3Wl9rQQ==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/_search/scroll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_search",
+						"scroll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - term",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"term\": {\r\n            \r\n            \"age\":\"21\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - term prefix",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"prefix\": {\r\n            \"marital_status\": {\r\n                \"value\": \"Un\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - term exists",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"exists\": {\r\n            \"field\": \"first_name\"\r\n            }\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - match",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"designation\": \"engineer\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - must match and sort case insensitive",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"interests\": \"Golf\"\r\n                    }\r\n                },\r\n                {\r\n                    \"match\": {\r\n                        \"gender\": \"Male\"\r\n                    }\r\n                },\r\n                {\r\n                    \"range\": {\r\n                        \"age\": {\r\n                            \"lte\": \"43\",\r\n                            \"gte\": \"40\"\r\n                        }\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"sort\": {\r\n        \"first_name.sortable_name\": \"asc\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - aggs cardinality",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {}\r\n    },\r\n    \"aggs\": {\r\n        \"desination_count\": {\r\n            \"cardinality\": {\r\n                \"field\": \"designation.keys_designation\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - aggs min max avg percentile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\": 0,\r\n    \"size\": 0,\r\n    \"query\": {\r\n        \"match_all\": {}\r\n    },\r\n    \"aggs\": {\r\n        \"avg_salary\": {\r\n            \"avg\": {\r\n                \"field\": \"salary\"\r\n            }\r\n        },\r\n        \"max_salary\": {\r\n            \"max\": {\r\n                \"field\": \"salary\"\r\n            }\r\n        },\r\n        \"min_salary\": {\r\n            \"min\": {\r\n                \"field\": \"salary\"\r\n            }\r\n        },\r\n        \"salary_ranks\": {\r\n            \"percentile_ranks\": {\r\n                \"field\": \"salary\",\r\n                \"values\": [\r\n                    90000,\r\n                    500000000\r\n                ]\r\n            }\r\n        },\r\n        \"desination_count\": {\r\n            \"terms\": {\r\n                \"field\": \"designation.keys_designation\"\r\n            }\r\n        },\r\n        \"projects\": {\r\n            \"nested\": {\r\n                \"path\": \"projects\"\r\n            },\r\n            \"aggs\": {\r\n                \"projects_count\": {\r\n                    \"terms\": {\r\n                        \"field\": \"projects.code.keyword\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"interests\": {\r\n            \"filters\": {\r\n                \"filters\": {\r\n                    \"golf\": {\r\n                        \"match\": {\r\n                            \"body\": \"golf\"\r\n                        }\r\n                    },\r\n                    \"football\": {\r\n                        \"match\": {\r\n                            \"body\": \"football\"\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - boolean must must_not filter should nested-term-with-boost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": {\r\n                \"term\": {\r\n                    \"age\": \"30\"\r\n                }\r\n            },\r\n            \"filter\": {\r\n                \"match\": {\r\n                    \"designation\": \"senior\"\r\n                }\r\n            },\r\n            \"must_not\": {\r\n                \"match\": {\r\n                    \"marital_status\": \"Unmarried\"\r\n                }\r\n            },\r\n            \"should\": [\r\n                {\r\n                    \"match\": {\r\n                        \"interests\": \"golf\"\r\n                    }\r\n                },\r\n                {\r\n                    \"range\": {\r\n                        \"date_of_joining\": {\r\n                            \"lt\": \"2019-01-01\"\r\n                        }\r\n                    }\r\n                },\r\n                {\r\n                    \"match\": {\r\n                        \"address\": \"Street\"\r\n                    }\r\n                },\r\n                {\r\n                    \"nested\": {\r\n                        \"path\": \"projects\",\r\n                        \"query\": {\r\n                            \"term\": {\r\n                                \"projects.code.keyword\": {\r\n                                    \"value\": \"WFGT69001866\",\r\n                                    \"boost\": 2.0\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            ],\r\n            \"minimum_should_match\": 1,\r\n            \"boost\": 1.0\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - match nested",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"nested\": {\r\n            \"path\": \"projects\",\r\n            \"query\": {\r\n                \"match\": {\r\n                    \"projects.code\": \"BLYV96832581\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - simple_query_string",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"simple_query_string\": {\r\n            \"query\": \"Senior Manager\",\r\n            \"fields\": [\"designation\"]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - multi_match",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"multi_match\": {\r\n            \"query\": \"will\",\r\n            \"fields\": [\"first_name\", \"last_name^3\"]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search - Range",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": {\r\n        \"range\" : {\r\n            \"age\" : {\r\n                \"gte\" : 40,\r\n                \"lte\" : 60,\r\n                \"boost\" : 2.0\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/employees/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Mapping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/employees/_mapping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"employees",
+						"_mapping"
+					]
+				},
+				"description": "This API returns the mapping of the index specified in the URL"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Document Count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cat/count/employees?v",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"count",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9100/_cat/indices?v",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9100",
+					"path": [
+						"_cat",
+						"indices"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Shards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cat/shards?v",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"shards"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cluster Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cluster/stats?human&pretty",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cluster",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "human",
+							"value": null
+						},
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Index",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
