@@ -5,7 +5,7 @@
 ## Test spring boot application in an integrated manner by invoking the REST API https://spring.io/guides/gs/testing-web/
 ## Following spring cache abstraction features are implemented in `RedisConfiguration` and `RedisClient` CacheResolver (for custom cache resolution), CacheManager, CustomKeyGenerator, connectionFactory, multiple cache, @Cacheable, @CachePut, @CacheEvict, Cache Prefix, Serializer
 ## Additionally following features from Redis have been implemented using spring-data-redis in `RedisConfiguration`, `RedisClient` - key expiration configuration,
-
+## Following are sample requests (not comprehensive list) to work with the application http://localhost:8080/getAllKeys?cache=customCache http://localhost:8080/getEntries?cache=customCache&key=tryCustomSerialization
 
 ## TODO - usage of multiple cache provider using cache manager
  
