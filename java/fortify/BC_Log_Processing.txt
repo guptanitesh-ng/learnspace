@@ -1,0 +1,30 @@
+##Games
+Commando
+Project IGI
+EA sports Cricket
+F1 Challenge
+
+##Listen
+Refer to filtered_BC_log_music.txt
+
+##Prachi
+Check the archive folder copied from old laptop
+2/9/2017 7:51:27 AM  Unable to copy E:\Prachi\tech mahindra\ISTQB.zip: Data error (cyclic redundancy check)
+
+##Watch
+Refer to filtered_BC_log_movies_tv_series.txt
+==Videos
+2/9/2017 8:05:21 PM  Unable to copy E:\Watch\Videos\marriage videos\ladies sangeet\PRJ_110802\VIDEO_TS\VTS_01_1.VOB: Data error (cyclic redundancy check)
+2/9/2017 8:08:27 PM  Unable to copy E:\Watch\Videos\marriage videos\ladies sangeet\PRJ_110802\VIDEO_TS\VTS_01_3.VOB: Data error (cyclic redundancy check)
+2/9/2017 8:19:17 PM  Unable to copy E:\Watch\Videos\marriage videos\NETIESH 4\VTS_01_2.VOB: Data error (cyclic redundancy check)
+2/9/2017 8:24:05 PM  Unable to copy E:\Watch\Videos\marriage videos\NITESH 2\VTS_01_4.VOB: Data error (cyclic redundancy check)
+
+ifb recipies book
+Make a note of softwares currently installed on 1450 and check if the installer is present.
+Copy data from 1450 to ext hard drive
+format 1450
+
+
+
+
+

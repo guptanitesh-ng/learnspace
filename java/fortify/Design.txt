@@ -1,0 +1,15 @@
+@OCP
+ResourceRequest core classes with Decorator pattern
+
+@SRP
+OrderManagementService - should have changed only if something changes with the order process. So all service calls should happen outside of the service.
+
+@ISP
+The facade patterns interfaces are gebnerally coarse grained interfaces.
+The interface-segregation principle (ISP) states that no client should be forced to depend on methods it does not use. For e.g. one big interface having all methods related to place and order, update and fetch order along with the customer data. This could ideally be separated into two interafces one handling customer and another handling only order data.
+HttpServletRequestAware
+
+@DI
+Switching between SOAP and REST based implementation of the positions data.
+
+@LSP
